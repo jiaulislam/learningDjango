@@ -4,19 +4,16 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 
 
-
 class PublishedManager(models.Manager):
     def get_queryset(self):
         return super(PublishedManager,
-            self).get_queryset()\
-                .filter(status='published')
+                     self).get_queryset() \
+            .filter(status='published')
 
 
 class Post(models.Model):
-
-    objects = models.Manager() # The default Manager
-    published = PublishedManager() # My Custom Manager
-
+    objects = models.Manager()  # The default Manager
+    published = PublishedManager()  # My Custom Manager
 
     STATUS_CHOICES = {
         ('draft', 'Draft'),
@@ -25,18 +22,18 @@ class Post(models.Model):
 
     title = models.CharField(max_length=250)
     slug = models.SlugField(max_length=250,
-        unique_for_date='publish')
+                            unique_for_date='publish')
     author = models.ForeignKey(User,
-        on_delete=models.CASCADE,
-        related_name='blog_posts')
+                               on_delete=models.CASCADE,
+                               related_name='blog_posts')
 
     body = models.TextField()
     publish = models.DateTimeField(default=timezone.now)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=10,
-        choices=STATUS_CHOICES,
-        default='draft')
+                              choices=STATUS_CHOICES,
+                              default='draft')
 
     class Meta:
         ordering = ('-publish',)
@@ -46,6 +43,6 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return reverse('blog:post_detail',
-            args=[self.publish.year,
-                self.publish.month,
-                self.publish.day, self.slug])
+                       args=[self.publish.year,
+                             self.publish.month,
+                             self.publish.day, self.slug])
