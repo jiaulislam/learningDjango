@@ -13,15 +13,15 @@ Share a post
 {% else %}
     <h1>Share "{{ post.title }} " by e-mail</h1>
     <form method="post">
-        {{ form.as_table }}
+        {% for field in form %}
+        <div>
+            {{ field.errors }}
+            {{ field.label_tag }} {{ field }}
+        </div>
+        {% endfor %}
+{#        {{ form.as_table }}#}
         {% csrf_token %}
         <input type="submit" value="Send e-mail">
     </form>
-{#    {% for field in form %}#}
-{#    <div>#}
-{#    {{ field.errors }}#}
-{#    {{ field.label_tag }} {{ field }}#}
-{#    </div>#}
-{#    {% endfor %}#}
 {% endif %}
 {% endblock %}
