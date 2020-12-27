@@ -1,8 +1,10 @@
 # Learning Django
 
 
-> References
--------------
-- Django 3 By Example (Third Edition)
-- Random google stuff
-- Random Youtube videos
+**References**
+-----------------------
+| Sources of Knowledge |
+| ---------------------|
+| Django 3 by Example(Third Edition) |
+| Random Google Search topics|
+| Random Youtube videos |
