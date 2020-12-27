@@ -5,14 +5,18 @@ from .forms import EmailPostForm, CommentForm
 from .models import Post, Comment
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.generic import ListView
+from taggit.models import Tag
 
-
-# Create your views here.
 
 # render all post list
-def post_list(request):
+def post_list(request, tag_slug=None):
     object_list = Post.published.all()
-    paginator = Paginator(object_list, 2)  # 3 post in each page
+    tag = None
+
+    if tag_slug:
+        tag = get_object_or_404(Tag, slug=tag_slug)
+        object_list = object_list.filter(tags__in=[tag])
+    paginator = Paginator(object_list, 3)  # 3 post in each page
     page = request.GET.get('page')
     try:
         posts = paginator.page(page)
@@ -25,8 +29,8 @@ def post_list(request):
     return render(request,
                   'blog/post/list.html', {
                       'page': page,
-                      'posts': posts}
-                  )
+                      'posts': posts,
+                      'tag': tag})
 
 
 # render a detailed post
