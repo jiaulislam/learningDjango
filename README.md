@@ -11,5 +11,6 @@ all the sources available to me. My primary reference book is "Django 3 by Examp
 | Sources of Knowledge |
 | ---------------------|
 | Django 3 by Example(Third Edition) |
+| Django Documentation 3.1.4 |
 | Random Google Search topics|
 | Random Youtube videos(Specially Thanks to : [Corey Schafer](https://www.youtube.com/channel/UCCezIgC97PvUuR4_gbFUs5g))|
